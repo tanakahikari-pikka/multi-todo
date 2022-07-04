@@ -16,7 +16,11 @@
       <div class="container">
         <div class="header">
           <nav class="nav d-flex justify-content-between">
-            <div class = "navbar-brand fcolor">todolist</div>
+            <%= link_to root_path do %>
+              <div class = "navbar-brand fcolor">
+                todolist
+              </div>
+            <% end %>
             <div class="scolor rounded h-75 mt-2">
               <a data-bs-toggle="collapse" class="text-decoration-none text-dark ps-2 pe-2 align-middle" href="#collapseCreateCategory" role="button" aria-expanded="false" aria-controls="collapseCreateCategory">
                 カテゴリー追加

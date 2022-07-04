@@ -3,8 +3,10 @@
     <div class="col-4">
       <div class="category-box scolor pb-3">
         <div class="category-name-box mcolor col-10">
-          <p class="category-name">
-            <%= category.name %>
+          <p class="category-name ">
+            <%= link_to category_path(category),class:"text-decoration-none text-light"  do %>
+              <%= category.name %>
+            <% end %>
           </p>
         </div><%# category-name-box %>
         <div class="category-links d-flex  mt-2   justify-content-around">
@@ -32,18 +34,26 @@
             </a>
         </div><%# addTodo %>
         <div class="text-center addListform">
-          <%#= form_with model: [category,List.new] , url: category_list_index_path(category,@list) ,local: true,class:"collapse",id:"collapseCreateToDo_#{category.id}" do |f| %>
-            <%#= f.text_area :name, rows: '2', placeholder: "TODOを追加",class:"col-10"  %>
+          <%= form_with model: [category,List.new] , url: category_list_index_path(category,@list) ,local: true,class:"collapse",id:"collapseCreateToDo_#{category.id}" do |f| %>
+            <%= f.text_area :todo, rows: '2', placeholder: "TODOを追加",class:"col-10"  %>
             <br>
-            <%#= f.submit "追加"  %>
-          <#% end %>
+            <%= f.submit "追加"  %>
+          <% end %>
         </div><%# addListform %>
         <div class="todolists mcolor rounded col-10 mx-auto mt-2 pt-2 pb-2 ">
           <ul class="text-white">
             <table>
               <tbody>
-                <tr>
-                </tr>
+                <% category.lists.each do |list| %>
+                  <tr>
+                    <td><%= list.todo %></td>
+                    <td>
+                      <%= link_to category_list_path(category,list),method: :delete,class:"text-white" do %>
+                        <i class="fas fa-trash-can pe-1"></i>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %><%# category.lists %>
               </tbody>
             </table>
           </ul>

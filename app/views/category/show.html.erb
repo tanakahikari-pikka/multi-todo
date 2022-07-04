@@ -1,0 +1,10 @@
+<h2><%= @category.name %></h2>
+<table>
+  <tbody>
+    <% @lists.each do |list| %>
+      <tr>
+        <td><%= list.todo %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

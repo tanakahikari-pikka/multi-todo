@@ -2,6 +2,12 @@ class CategoryController < ApplicationController
   def index
     @categories = Category.all
     @category = Category.new
+    @list = @category.lists
+  end
+
+  def show
+    @category = Category.find(params[:id])
+    @lists = @category.lists
   end
 
   def create
@@ -9,10 +15,12 @@ class CategoryController < ApplicationController
     if @category.save
       redirect_to category_index_path
     else
+      @list = List.new
       @categories = Category.all
       render :index
     end
   end
+
 
   def update
     @category = Category.find(params[:id])
@@ -36,7 +44,7 @@ class CategoryController < ApplicationController
   end
 
   private
-  def category_params
-      params.require(:category).permit(:name)
-  end
+        def category_params
+            params.require(:category).permit(:name,lists_attributes: [:todo] )
+        end
 end
