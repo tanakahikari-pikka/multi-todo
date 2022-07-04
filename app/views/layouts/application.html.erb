@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MultibleTodo</title>
+    <title>Todolist</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/03fb6268b4.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   </head>
 
   <body>
-    <%= yield %>
+    <header class = "mcolor fixed-top">
+      <div class="container">
+        <div class="header">
+          <nav class="nav d-flex justify-content-between">
+            <div class = "navbar-brand fcolor">todolist</div>
+            <div class="scolor rounded h-75 mt-2">
+              <a data-bs-toggle="collapse" class="text-decoration-none text-dark ps-2 pe-2 align-middle" href="#collapseCreateCategory" role="button" aria-expanded="false" aria-controls="collapseCreateCategory">
+                カテゴリー追加
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <div class="container mb-5">
+      <div class="newCategory">
+        <%= form_with model: @category, url: { action: :create }, class: "new_category collapse",id:"collapseCreateCategory", local: true do |f| %>
+          <%= f.label :category %>
+          <%= f.text_field :name, autofocus: true, class: "form-control categoryName", placeholder: "カテゴリ名" %>
+          <div class="text-center"><%= f.submit "作成", class: "submitBtn" %></div>
+        <% end %>
+      </div>
+      <%= yield %>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>
+

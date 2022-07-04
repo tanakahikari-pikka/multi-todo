@@ -1,0 +1,56 @@
+<div class="categoryList row flex-nowrap mb-6">
+  <% @categories.each do |category| %>
+    <div class="col-4">
+      <div class="category-box scolor pb-3">
+        <div class="category-name-box mcolor col-10">
+          <p class="category-name">
+            <%= category.name %>
+          </p>
+        </div><%# category-name-box %>
+        <div class="category-links d-flex  mt-2   justify-content-around">
+          <div class="categoryEdit mcolor col-4 rounded text-center pt-1 pb-1">
+            <a class=" text-decoration-none fcolor" data-bs-toggle="collapse" href="#collapseEditCategory_<%= category.id%>" role="button" aria-expanded="false" aria-controls="collapseEditCategory_<%= category.id%>">
+              <i class="fas fa-file-pen"></i>  更新
+            </a>
+          </div><%# categoryEdit %>
+          <div class="categoryDestroy mcolor col-4 rounded text-center pt-1 pb-1">
+            <%= link_to  category_path(category),method: :delete,class:"text-white text-decoration-none" do %>
+              <i class="fas fa-trash-can"></i> 削除
+            <% end %>
+          </div><%# categoryDestroy %>
+        </div><%# category.links %>
+        <div class="text-center categoryEditform">
+          <%= form_with model: category, method: :patch,class:"collapse  mt-2 mb-1",id:"collapseEditCategory_#{category.id}" do |f| %>
+            <%= f.text_area :name,rows:"2",placeholder: "カテゴリーを編集",class:"col-10" %>
+            <br>
+            <%= f.submit "編集"  %>
+          <% end %>
+        </div><%# categoryEditform %>
+        <div class="addTodo  mcolor col-10 mt-2 mb-2 mx-auto rounded text-white text-center pt-1 pb-1">
+            <a class="text-decoration-none text-white" data-bs-toggle="collapse" href="#collapseCreateToDo_<%= category.id %>" role="button" aria-expanded="false" aria-controls="collapseCreateToDo_<%= category.id %>">
+              <i class="fa-solid fa-square-plus"></i>  TODO 追加
+            </a>
+        </div><%# addTodo %>
+        <div class="text-center addListform">
+          <%#= form_with model: [category,List.new] , url: category_list_index_path(category,@list) ,local: true,class:"collapse",id:"collapseCreateToDo_#{category.id}" do |f| %>
+            <%#= f.text_area :name, rows: '2', placeholder: "TODOを追加",class:"col-10"  %>
+            <br>
+            <%#= f.submit "追加"  %>
+          <#% end %>
+        </div><%# addListform %>
+        <div class="todolists mcolor rounded col-10 mx-auto mt-2 pt-2 pb-2 ">
+          <ul class="text-white">
+            <table>
+              <tbody>
+                <tr>
+                </tr>
+              </tbody>
+            </table>
+          </ul>
+        </div><%# todolists %>
+      </div><%# category-box %>
+    </div><%# col-4 %>
+  <% end %><%# categories %>
+</div><%# categoryList %>
+
+
