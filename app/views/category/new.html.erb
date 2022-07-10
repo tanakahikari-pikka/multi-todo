@@ -1,0 +1,9 @@
+<%= form_with model: @category, url: { action: :create } do |f| %>
+  <%= f.label :category, "カテゴリ" %>
+  <%= f.text_area :name %>
+  <%= f.fields_for :lists do |ff| %>
+    <%= ff.label :todo, "todo" %>
+    <%= ff.text_area :todo %>
+  <% end %>
+  <%= f.submit "投稿" %>
+<% end %>

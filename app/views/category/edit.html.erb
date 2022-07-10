@@ -1,0 +1,10 @@
+<%= form_with model: @category, url: category_path(@category) do |f| %>
+  <%= @category.name %>
+
+  <% @category.lists.each do |list| %>
+    <%= f.fields_for "lists[]", list do |af| %>
+        <%= af.text_field :todo %>
+    <% end %>
+  <% end %>
+  <%= f.submit "更新" %>
+<% end %>

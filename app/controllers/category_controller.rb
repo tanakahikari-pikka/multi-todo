@@ -1,4 +1,10 @@
 class CategoryController < ApplicationController
+  def new
+    @category = Category.new
+    2.times {@category.lists.build }
+
+  end
+
   def index
     @categories = Category.all
     @category = Category.new
@@ -8,6 +14,10 @@ class CategoryController < ApplicationController
   def show
     @category = Category.find(params[:id])
     @lists = @category.lists
+  end
+
+  def edit
+    @category = Category.includes(:lists).find(params[:id])
   end
 
   def create
@@ -24,12 +34,10 @@ class CategoryController < ApplicationController
 
   def update
     @category = Category.find(params[:id])
-    if @category.update(category_params)
+    ActiveRecord::Base.transaction do
+      @category.update_attributes!(category_params)
+      List.multi_update(lists_params)
       redirect_to category_index_path
-    else
-      @list = List.new
-      @categories = Category.all
-      render :index
     end
   end
 
@@ -44,7 +52,10 @@ class CategoryController < ApplicationController
   end
 
   private
-        def category_params
-            params.require(:category).permit(:name,lists_attributes: [:todo] )
-        end
+  def category_params
+    params.require(:category).permit(:name,lists_attributes:[:todo])
+  end
+  def lists_params
+    params.require(:category).permit(lists: :todo)[:lists]
+  end
 end
