@@ -1,8 +1,7 @@
 class CategoryController < ApplicationController
   def new
     @category = Category.new
-    2.times {@category.lists.build }
-
+    10.times {@category.lists.build }
   end
 
   def index

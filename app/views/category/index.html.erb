@@ -4,9 +4,7 @@
       <div class="category-box scolor pb-3">
         <div class="category-name-box mcolor col-10">
           <p class="category-name ">
-            <%= link_to category_path(category),class:"text-decoration-none text-light"  do %>
               <%= category.name %>
-            <% end %>
           </p>
         </div><%# category-name-box %>
         <div class="category-links d-flex  mt-2   justify-content-around">
@@ -40,6 +38,9 @@
             <%= f.submit "追加"  %>
           <% end %>
         </div><%# addListform %>
+        <div class="editLink  mcolor col-10 mt-2 mb-2 mx-auto rounded text-white text-center pt-1 pb-1">
+          <%= link_to "TODO一括編集",edit_category_path(category) ,class:"text-white text-decoration-none" %>
+        </div><%# editLink %>
         <div class="todolists mcolor rounded col-10 mx-auto mt-2 pt-2 pb-2 ">
           <ul class="text-white">
             <table>
