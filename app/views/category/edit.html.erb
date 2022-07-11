@@ -1,10 +1,20 @@
 <%= form_with model: @category, url: category_path(@category) do |f| %>
-  <%= @category.name %>
+  <table>
+    <thead>
+      <th>カテゴリ名 : <%= @category.name %></th>
+    </thead>
+    <tbody>
+      <% @category.lists.each do |list| %>
+        <%= f.fields_for "lists[]", list do |af| %>
+          <tr>
+            <td><%= af.check_box :done,:as => :boolean %></td>
+            <td><%= af.text_field :todo %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 
-  <% @category.lists.each do |list| %>
-    <%= f.fields_for "lists[]", list do |af| %>
-        <%= af.text_field :todo %>
-    <% end %>
-  <% end %>
-  <%= f.submit "更新" %>
+ 
+  <%= f.submit "更新",class:"mt-3" %>
 <% end %>

@@ -1,7 +1,7 @@
 class CategoryController < ApplicationController
   def new
     @category = Category.new
-    10.times {@category.lists.build }
+    5.times {@category.lists.build }
   end
 
   def index
@@ -52,9 +52,9 @@ class CategoryController < ApplicationController
 
   private
   def category_params
-    params.require(:category).permit(:name,lists_attributes:[:todo])
+    params.require(:category).permit(:name,lists_attributes:[:todo,:done])
   end
   def lists_params
-    params.require(:category).permit(lists: :todo)[:lists]
+    params.require(:category).permit(lists: [:todo,:done])[:lists]
   end
 end

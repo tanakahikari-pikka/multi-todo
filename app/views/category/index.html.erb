@@ -45,16 +45,19 @@
           <ul class="text-white">
             <table>
               <tbody>
-                <% category.lists.each do |list| %>
-                  <tr>
-                    <td><%= list.todo %></td>
-                    <td>
-                      <%= link_to category_list_path(category,list),method: :delete,class:"text-white" do %>
-                        <i class="fas fa-trash-can pe-1"></i>
+                    <% category.lists.each do |list| %>
+                      <%= form_with model: [category,list] do |f| %>
+                        <tr>
+                          <td class="pe-2"><%= f.check_box :done %></td>
+                          <td class=" col-10"><%= f.label list.todo ,class:"col-8" %><td>
+                          <td>
+                            <%= link_to category_list_path(category,list),method: :delete,class:"text-white" do %>
+                              <i class="fas fa-trash-can pe-1"></i>
+                            <% end %>
+                          </td>
+                        </tr>
                       <% end %>
-                    </td>
-                  </tr>
-                <% end %><%# category.lists %>
+                    <% end %><%# category.lists %>
               </tbody>
             </table>
           </ul>
