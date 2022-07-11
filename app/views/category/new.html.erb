@@ -1,21 +1,22 @@
-<table>
 <%= form_with model: @category, url: { action: :create } do |f| %>
-  <thead>
-    <th>
-      <%= f.label :category, "カテゴリ" %>
-      <br>
-      <%= f.text_field :name %>
-    </th>
-  </thead>
-  <tbody>
-    <%= f.fields_for :lists do |ff| %>
-      <tr>
-        <td><%= ff.label :todo, "todo" %></td>
-        <td><%= ff.text_field :todo %></td>
-      </tr>
-    <% end %>
-    <td><%= f.submit "投稿" %></td>
-  </tbody>
-  <% end %>
-</table>
+  <table>
+    <thead>
+      <th>
+        <%= f.label :category, "カテゴリ" %>
+        <br>
+        <%= f.text_field :name %>
+      </th>
+    </thead>
+    <tbody>
+      <%= f.fields_for :lists do |ff| %>
+        <tr>
+          <td><%= ff.label :todo, "todo" %></td>
+          <td><%= ff.text_field :todo %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= f.submit "投稿" %>
+<% end %>
+
 
